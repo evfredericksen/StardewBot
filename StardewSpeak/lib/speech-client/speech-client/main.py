@@ -25,7 +25,7 @@ from dragonfly.log import setup_log
 from srabuilder import sleep, environment
 import srabuilder
 
-import stardew
+import stardew, server, manual_recognition
 
 
 # --------------------------------------------------------------------------
@@ -34,12 +34,14 @@ import stardew
 
 class Observer(RecognitionObserver):
     def on_begin(self):
+        return
         print("Speech started.")
 
     def on_recognition(self, words):
         print("Recognized:", " ".join(words))
 
     def on_failure(self):
+        return
         print("Sorry, what was that?")
 
 
@@ -60,7 +62,7 @@ def command_line_loop(engine):
 
 def main(args):
     logging.basicConfig(level=logging.INFO)
-    engine = srabuilder.setup_engine(silence_timeout=250)
+    engine = srabuilder.setup_engine(silence_timeout=0)
 
     # Register a recognition observer
     observer = Observer()
@@ -68,8 +70,10 @@ def main(args):
 
     sleep.load_sleep_wake_grammar(True)
     startdew_context = AppContext(title="stardew")
+    server.setup_async_loop()
     map_contexts_to_builder = {
-        (startdew_context,): stardew.rule_builder(),
+        # (startdew_context,): stardew.rule_builder(),
+        (): manual_recognition.rule_builder(),
     }
     srabuilder.load_environment_grammars(map_contexts_to_builder)
 

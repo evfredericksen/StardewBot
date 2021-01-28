@@ -154,8 +154,7 @@ namespace StardewSpeak
                 Log($"Current tiles: x: {tileX}, y: {tileY}");
                 Log($"Current mouse position: x: {mouseX}, y: {mouseY}");
 
-                var og = Pathfinder.Pathfinder.OpenGates();
-                var isPassable = Pathfinder.Pathfinder.IsPassable(location, tileX, tileY, og);
+                var isPassable = Pathfinder.Pathfinder.IsPassable(location, tileX, tileY);
                 var isOccupied = location.isTileOccupiedIgnoreFloors(vec);
                 Log($"isPassable: {isPassable}");
                 Log($"isOccupied: {isOccupied}\n");

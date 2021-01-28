@@ -85,7 +85,6 @@ numrep2 = Sequence(
 num2 = Modifier(numrep2, rules.parse_numrep)
 
 def rule_builder():
-    server.setup_async_loop()
     builder = rules.RuleBuilder()
     builder.basic.append(
         rules.ParsedRule(
